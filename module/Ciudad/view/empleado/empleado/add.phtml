@@ -1,0 +1,35 @@
+<?php
+$title = 'Agregar nueva cid';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$nombre_ciudad = $form->get('nombre_ciudad');
+$nombre_ciudad->setAttribute('class', 'form-control');
+$nombre_ciudad->setAttribute('placeholder', 'Ciudad title');
+
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('ciudad', ['action' => 'add']));
+$form->prepare();       /*RUTA DE LA CARPETA VISTA ciudad*/
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+// label, element, and errors separately within ?>
+    <div class="form-group">
+        <?= $this->formLabel($nombre_ciudad) ?>
+        <?= $this->formElement($nombre_ciudad) ?>
+        <?= $this->formElementErrors()->render($nombre_ciudad, ['class' => 'help-block']) ?>
+    </div>
+
+
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_ciudad'));
+echo $this->form()->closeTag();
